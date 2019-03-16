@@ -1,0 +1,1256 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{rare wave}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{一.
+预算决定波系分类}\label{ux4e00.-ux9884ux7b97ux51b3ux5b9aux6ce2ux7cfbux5206ux7c7b}
+
+If we consider all the elastic and plastic waves, there are 4*4 sixteen
+possible cases. For simple, we only consider the cases in the left side
+and samilar process will be taken in the right.
+
+Case 1 Case 2 Case 3 Case 4
+
+    \subsection{通过HLLCE进行预算}\label{ux901aux8fc7hllceux8fdbux884cux9884ux7b97}
+
+考虑双弹性波情况
+
+With only plastic or plastic shock wave
+
+    By using the relation of \(u_L^* =u_R^* = s^*\), the speed of contact
+wave can be evaluated as
+
+\begin{equation}
+ \hat{s}^* = \frac{\sigma_L-\sigma_R+\rho_L u_L(s_L-u_L)-\rho_R u_R(s_R-u_R)}{\rho_L(s_L-u_L)-\rho_R(s_R-u_R)},
+\end{equation}
+
+the density is solved as
+
+\begin{equation}\label{eq:rhoLs}
+  \hat{\rho}_L^* = \frac{\rho_L(u_L-s_L)}{\hat{s}^*-s_L}.
+\end{equation}
+
+Similarly, the density behind the right going wave can be given as
+
+\begin{equation}
+  \hat{\rho}_R^* = \frac{\rho_R(u_R-s_R)}{\hat{s}^*-s_R}.
+\end{equation}
+
+    The deviatoric stress is evaluated as
+
+\begin{equation}  \label{sxx1}
+  \hat{s}_{xxL}^*=-\frac{4}{3}\mu\text{ln}(\frac{\hat{\rho}_L^*}{\rho_L})+s_{xxL}, \quad   \hat{s}_{xxR}^*=-\frac{4}{3}\mu\text{ln}(\frac{\hat{\rho}_R^*}{\rho_R})+s_{xxR}.
+\end{equation}
+
+If the speeds of left and right going waves are given, we can evaluate
+all states in the star regions on the two sides of the contact wave.
+Here we define the speeds of left and right going waves as
+
+\begin{equation}
+      s_L = \text{min} (u_L-c_L, u_R-c_R, 0),  \quad s_R = \text{max}(u_L+c_L, u_R+c_R, 0).
+    \end{equation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k}{function} \PY{n}{Presolve}\PY{p}{(}\PY{n}{varL}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{varR}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{conL}\PY{o}{::}\PY{n}{Const}\PY{p}{,}\PY{n}{conR}\PY{o}{::}\PY{n}{Const}\PY{p}{)}
+                 
+             \PY{n}{ρL}\PY{p}{,} \PY{n}{uL}\PY{p}{,} \PY{n}{pL}\PY{p}{,} \PY{n}{sxxL} \PY{o}{=} \PY{n}{varL}\PY{o}{.}\PY{n}{ρ}\PY{p}{,} \PY{n}{varL}\PY{o}{.}\PY{n}{u}\PY{p}{,} \PY{n}{varL}\PY{o}{.}\PY{n}{p}\PY{p}{,} \PY{n}{varL}\PY{o}{.}\PY{n}{sxx}
+             \PY{n}{ρR}\PY{p}{,} \PY{n}{uR}\PY{p}{,} \PY{n}{pR}\PY{p}{,} \PY{n}{sxxR} \PY{o}{=} \PY{n}{varR}\PY{o}{.}\PY{n}{ρ}\PY{p}{,} \PY{n}{varR}\PY{o}{.}\PY{n}{u}\PY{p}{,} \PY{n}{varR}\PY{o}{.}\PY{n}{p}\PY{p}{,} \PY{n}{varR}\PY{o}{.}\PY{n}{sxx}
+             \PY{n}{σL}  \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{pL}\PY{o}{+}\PY{n}{sxxL}
+             
+             \PY{n}{UL} \PY{o}{=} \PY{p}{[}\PY{n}{ρL}\PY{p}{,} \PY{n}{uL}\PY{p}{,} \PY{n}{pL}\PY{p}{,} \PY{n}{sxxL}\PY{p}{]}
+             \PY{n}{UR} \PY{o}{=} \PY{p}{[}\PY{n}{ρR}\PY{p}{,} \PY{n}{uR}\PY{p}{,} \PY{n}{pR}\PY{p}{,} \PY{n}{sxxR}\PY{p}{]}
+             \PY{n}{cL} \PY{o}{=} \PY{n}{sound}\PY{p}{(}\PY{n}{UL}\PY{p}{[}\PY{o}{:}\PY{p}{]}\PY{p}{,}\PY{n}{conL}\PY{p}{)}
+            \PY{c}{\PYZsh{} eL = PToe(ρL, pL, conL)}
+             
+             \PY{n}{σR}  \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{pR}\PY{o}{+}\PY{n}{sxxR}
+             \PY{n}{cR} \PY{o}{=} \PY{n}{sound}\PY{p}{(}\PY{n}{UR}\PY{p}{[}\PY{o}{:}\PY{p}{]}\PY{p}{,}\PY{n}{conR}\PY{p}{)}
+           \PY{c}{\PYZsh{}  eR = PToe(ρR, pR, conR)}
+             
+             \PY{n}{sL} \PY{o}{=} \PY{n}{min}\PY{p}{(}\PY{n}{uL}\PY{o}{\PYZhy{}}\PY{n}{cL}\PY{p}{,} \PY{n}{uR}\PY{o}{\PYZhy{}}\PY{n}{cR}\PY{p}{)}
+             \PY{n}{sR} \PY{o}{=} \PY{n}{max}\PY{p}{(}\PY{n}{uL}\PY{o}{+}\PY{n}{cL}\PY{p}{,} \PY{n}{uR}\PY{o}{+}\PY{n}{cR}\PY{p}{)}
+                 
+             \PY{n}{s\PYZus{}star} \PY{o}{=} \PY{p}{(}\PY{n}{σL} \PY{o}{\PYZhy{}} \PY{n}{σR} \PY{o}{+} \PY{n}{ρL}\PY{o}{*}\PY{n}{uL}\PY{o}{*}\PY{p}{(}\PY{n}{sL}\PY{o}{\PYZhy{}}\PY{n}{uL}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{ρR}\PY{o}{*} \PY{n}{uR}\PY{o}{*}\PY{p}{(}\PY{n}{sR}\PY{o}{\PYZhy{}}\PY{n}{uR}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{ρL}\PY{o}{*}\PY{p}{(}\PY{n}{sL}\PY{o}{\PYZhy{}}\PY{n}{uL}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{ρR}\PY{o}{*}\PY{p}{(}\PY{n}{sR}\PY{o}{\PYZhy{}}\PY{n}{uR}\PY{p}{)}\PY{p}{)}
+                 
+             \PY{n}{ρLstar} \PY{o}{=} \PY{n}{ρL}\PY{o}{*}\PY{p}{(}\PY{n}{uL}\PY{o}{\PYZhy{}}\PY{n}{sL}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{s\PYZus{}star} \PY{o}{\PYZhy{}} \PY{n}{sL}\PY{p}{)}
+             \PY{n}{ρRstar} \PY{o}{=} \PY{n}{ρR}\PY{o}{*}\PY{p}{(}\PY{n}{uR}\PY{o}{\PYZhy{}}\PY{n}{sR}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{s\PYZus{}star} \PY{o}{\PYZhy{}} \PY{n}{sR}\PY{p}{)}
+                 
+             \PY{n}{sxxLstar} \PY{o}{=}  \PY{n}{sxxL} \PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{conL}\PY{o}{.}\PY{n}{μ} \PY{o}{*}\PY{p}{(}\PY{n}{log}\PY{p}{(}\PY{n}{ρLstar}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{log}\PY{p}{(}\PY{n}{ρL}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sxxRstar} \PY{o}{=}  \PY{n}{sxxR} \PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{conR}\PY{o}{.}\PY{n}{μ} \PY{o}{*}\PY{p}{(}\PY{n}{log}\PY{p}{(}\PY{n}{ρRstar}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{log}\PY{p}{(}\PY{n}{ρR}\PY{p}{)}\PY{p}{)}
+          \PY{c}{\PYZsh{}   @show sxxLstar, sxxRstar,ρLstar,ρRstar}
+             \PY{n}{caseL} \PY{o}{=} \PY{n}{CaseSelect}\PY{p}{(}\PY{n}{sxxL}\PY{p}{,}\PY{n}{sxxLstar}\PY{p}{,} \PY{n}{ρL}\PY{p}{,} \PY{n}{ρLstar}\PY{p}{,}\PY{n}{conL}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{caseR} \PY{o}{=} \PY{n}{CaseSelect}\PY{p}{(}\PY{n}{sxxR}\PY{p}{,}\PY{n}{sxxRstar}\PY{p}{,} \PY{n}{ρR}\PY{p}{,} \PY{n}{ρRstar}\PY{p}{,}\PY{n}{conR}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{return} \PY{n}{caseL}\PY{p}{,} \PY{n}{caseR}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} Presolve (generic function with 1 method)
+\end{Verbatim}
+            
+    \subsection{分类}\label{ux5206ux7c7b}
+
+Also consider the cases in the left, \#\#\# Case 1 The deviatoric stress
+satisfies
+\[| \hat{s}_{xxL}^* | \ge  \frac{2}{3}Y_0   \quad \text{and} \quad | s_{xxL} | \ge  \frac{2}{3}Y_0 \quad  \\\text{or} \quad | \hat{s}_{xxL}^* | \lt  \frac{2}{3}Y_0   \quad \text{and} \quad | s_{xxL} | \lt  \frac{2}{3}Y_0 \]
+
+The density satisfies \[ \hat{\rho}_L^* < \rho_L\]
+
+    \subsubsection{Case 2}\label{case-2}
+
+The deviatoric stress satisfies
+\[| \hat{s}_{xxL}^* | \ge  \frac{2}{3}Y_0   \quad \text{and} \quad | s_{xxL} | \lt  \frac{2}{3}Y_0  \]
+
+The density satisfies \[ \hat{\rho}_L^* < \rho_L\]
+
+    \subsubsection{Case 3}\label{case-3}
+
+The deviatoric stress satisfies
+\[| \hat{s}_{xxL}^* | \ge  \frac{2}{3}Y_0   \quad \text{and} \quad | s_{xxL} | \ge  \frac{2}{3}Y_0 \quad  \\\text{or} \quad | \hat{s}_{xxL}^* | \lt  \frac{2}{3}Y_0   \quad \text{and} \quad | s_{xxL} | \lt  \frac{2}{3}Y_0 \]
+The density satisfies \[ \hat{\rho}_L^* > \rho_L\]
+
+    \subsubsection{Case 4}\label{case-4}
+
+The deviatoric stress satisfies
+\[| \hat{s}_{xxL}^* | \ge  \frac{2}{3}Y_0   \quad \text{and} \quad | s_{xxL} | \lt  \frac{2}{3}Y_0  \]
+
+The density satisfies \[ \hat{\rho}_L^* > \rho_L\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{function} \PY{n}{CaseSelect}\PY{p}{(}\PY{n}{sxx₀}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{sxx₁}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,}\PY{n}{ρ₀}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{ρ₁}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,}\PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{,}\PY{n}{LoR}\PY{o}{::}\PY{k+kt}{Int}\PY{p}{)}
+             \PY{n}{Y0} \PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{Y0}
+               \PY{k}{if} \PY{n}{abs}\PY{p}{(}\PY{n}{sxx₁}\PY{p}{)} \PY{o}{≥} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{Y0}  \PY{o}{\PYZam{}\PYZam{}} \PY{n}{abs}\PY{p}{(}\PY{n}{sxx₀}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{Y0}   
+                 \PY{k}{if} \PY{n}{ρ₁} \PY{o}{\PYZgt{}} \PY{n}{ρ₀}
+                     \PY{k}{if} \PY{n}{LoR} \PY{o}{==} \PY{l+m+mi}{1}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Shock}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{c}{\PYZsh{} 左侧双激波}
+                     \PY{k}{else}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Shock}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)} \PY{c}{\PYZsh{} 右侧双激波 }
+                     \PY{k}{end}
+                 \PY{k}{else}
+                     \PY{k}{if} \PY{n}{LoR} \PY{o}{==} \PY{l+m+mi}{1}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Rare}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{c}{\PYZsh{} case2 Left}
+                     \PY{k}{else}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Rare}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)} \PY{c}{\PYZsh{} case2 Right}
+                     \PY{k}{end}
+                 \PY{k}{end}
+             \PY{k}{else}
+                 \PY{k}{if} \PY{n}{ρ₁} \PY{o}{\PYZgt{}} \PY{n}{ρ₀}
+                     \PY{k}{if} \PY{n}{LoR} \PY{o}{==} \PY{l+m+mi}{1}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Shock}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{c}{\PYZsh{} case3}
+                         \PY{k}{else}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Shock}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+                     \PY{k}{end}
+                 \PY{k}{else}
+                     \PY{k}{if} \PY{n}{LoR} \PY{o}{==} \PY{l+m+mi}{1}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Rare}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{c}{\PYZsh{}case1 Left}
+                     \PY{k}{else}
+                         \PY{n}{case} \PY{o}{=} \PY{n}{Rare}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+                     \PY{k}{end}
+                 \PY{k}{end}
+             \PY{k}{end}
+             \PY{k}{return} \PY{n}{case}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} CaseSelect (generic function with 1 method)
+\end{Verbatim}
+            
+    \subsection{1 左侧膨胀波}\label{ux5de6ux4fa7ux81a8ux80c0ux6ce2}
+
+ 如图，根据膨胀波关系式有
+
+\begin{equation}
+    du+\frac{c}{\rho} d\rho= 0\\
+    d\sigma +c^2 d\rho = 0
+\end{equation}
+
+where \(\sigma = -p +s_{xx}\), and
+
+\begin{equation}
+    dp-S^2d\rho = 0\\
+    ds_{xx}+\frac{4\mu}{3\rho} d\rho= 0 
+    \end{equation}
+
+Integration from \(Q_L\) to \(Q^*_L\)
+
+\begin{equation}
+u_L^* =- \int_{\rho_L}^{\rho^*_L}\frac{c}{\rho}d\rho + u_L\\
+\sigma_L^* = -\int_{\rho_L}^{\rho^*_L} c^2 d\rho +\sigma_L
+\end{equation}
+
+and
+
+\begin{equation}
+p_L^* = \int_{\rho_L}^{\rho^*_L}S^2 d\rho + p_L\\
+s_{xxL}^* = -\int_{\rho_L}^{\rho^*_L} \frac{4\mu}{3\rho} d\rho +s_{xxL}
+\end{equation}
+
+    For right side
+
+\begin{equation}
+u_R^* = \int_{\rho_R}^{\rho^*_R}\frac{c}{\rho}d\rho + u_R\\
+\sigma_R^* = -\int_{\rho_R}^{\rho^*_R} c^2 d\rho +\sigma_R
+\end{equation}
+
+and
+
+\begin{equation}
+p_R^* = \int_{\rho_R}^{\rho^*_R}S^2 d\rho + p_R\\
+s_{xxR}^* = -\int_{\rho_R}^{\rho^*_R} \frac{4\mu}{3\rho} d\rho +s_{xxR}
+\end{equation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{struct} \PY{n}{Shock}
+             \PY{n}{cs}\PY{o}{::}\PY{k+kt}{Int}
+         \PY{k}{end}
+         
+         \PY{n}{struct} \PY{n}{Rare}
+             \PY{n}{cs}\PY{o}{::}\PY{k+kt}{Int}
+             
+         \PY{k}{end}
+         \PY{c}{\PYZsh{}\PYZsh{}case 说明  cs=1 为左单波 cs=2 为左双波}
+         \PY{c}{\PYZsh{}\PYZsh{}          cs=3 为右单波 cs= 4 为右双波}
+\end{Verbatim}
+
+
+    \(s_{xxL}^*\) can be given directly as
+\[s_{xx}(\rho) = s_{xxL} - \frac{4}{3}\mu [\text{ln}(\rho) - \text{ln}(\rho_L)] \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{function} \PY{n}{Sxx}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{)}
+             \PY{n}{sxx0}\PY{p}{,}\PY{n}{ρ0} \PY{o}{=} \PY{n}{var0}\PY{o}{.}\PY{n}{sxx}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{ρ}
+             \PY{n}{Y0}   \PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{Y0}
+             
+             \PY{n}{sxx} \PY{o}{=} \PY{n}{sxx0} \PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{con}\PY{o}{.}\PY{n}{μ} \PY{o}{*}\PY{p}{(}\PY{n}{log}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{log}\PY{p}{(}\PY{n}{ρ0}\PY{p}{)}\PY{p}{)}
+             \PY{k}{if} \PY{n}{abs}\PY{p}{(}\PY{n}{sxx}\PY{p}{)} \PY{o}{≥} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{Y0}
+                 \PY{n}{sxx} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{Y0}\PY{o}{*}\PY{n}{sign}\PY{p}{(}\PY{n}{sxx}\PY{p}{)}
+             \PY{k}{end}
+             \PY{k}{return} \PY{n}{sxx}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} Sxx (generic function with 1 method)
+\end{Verbatim}
+            
+    Then we evaluate \(p_L^*\), as
+\[S^2 = a^2 - \rho_0 \Gamma_0 \frac{s_{xx}}{\rho^2} = a_0^2\frac{\partial f}{\partial \eta}+\frac{p}{\rho^2}\rho_0\Gamma_0-\rho_0 \Gamma_0\frac{s_{xx}}{\rho^2}\]
+
+    So \(p(\rho)\) is in the form of
+\[ \tag{2.1} p(\rho) = \int_{\rho_L}^{\rho} \lambda_1 \frac{p}{\rho^2}+ f_2(\rho) d\rho + p_L\]
+where
+\[ \lambda_1 = \rho_0 \Gamma_0 \quad f_2(\rho) = a_0^2\frac{\partial f}{\partial \eta}- \lambda_1\frac{s_{xx}(\rho)}{\rho^2}\]
+it can be written in the different form as
+
+    \[p'(\rho) - \lambda_1 \frac{p}{\rho^2} = f_2(\rho), \quad p(\rho_L) = p_L\]
+it can be solved out as
+\[ p(\rho) = p_Le^{\frac{\lambda_1}{\rho_L}-\frac{\lambda_1}{\rho}} +e^{-\frac{\lambda_1}{\rho}}\int_{\rho_L}^\rho f_2(\rho) e^{\frac{\lambda_1}{x}}dx\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{function} \PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{var0}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{,} \PY{n}{case}\PY{o}{::}\PY{n}{Rare}\PY{p}{)}
+             \PY{n}{ρ₀}\PY{p}{,}\PY{n}{p₀} \PY{o}{=} \PY{n}{var0}\PY{o}{.}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{p}
+             \PY{n}{ρ0}\PY{p}{,}\PY{n}{Γ0}\PY{p}{,}\PY{n}{a0}\PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{ρ0}\PY{p}{,}\PY{n}{con}\PY{o}{.}\PY{n}{Γ0}\PY{p}{,}\PY{n}{con}\PY{o}{.}\PY{n}{a0}   
+             \PY{n}{λ₁} \PY{o}{=} \PY{n}{ρ0}\PY{o}{*}\PY{n}{Γ0}
+             \PY{n}{f2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=}\PY{n}{a0}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{fηη}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{con}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n}{λ₁}\PY{o}{*}\PY{n}{Sxx}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0}\PY{p}{,}\PY{n}{con}\PY{p}{)}\PY{o}{/}\PY{n}{ρ}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}
+         
+             \PY{n}{p} \PY{o}{=} \PY{n}{p₀}\PY{o}{*}\PY{n}{exp}\PY{p}{(}\PY{n}{λ₁}\PY{o}{/}\PY{n}{ρ₀} \PY{o}{\PYZhy{}} \PY{n}{λ₁}\PY{o}{/}\PY{n}{ρ}\PY{p}{)} \PY{o}{+} \PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{λ₁}\PY{o}{/}\PY{n}{ρ}\PY{p}{)}\PY{o}{*}\PY{n}{GaussIntegral}\PY{p}{(}\PY{n}{ρ}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+                \PY{n}{f2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)}\PY{o}{*}\PY{n}{exp}\PY{p}{(}\PY{n}{λ₁}\PY{o}{/}\PY{n}{ρ}\PY{p}{)}\PY{p}{,} \PY{n}{ρ₀}\PY{p}{,} \PY{n}{ρ}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+             \PY{k}{return} \PY{n}{p}
+         \PY{k}{end}
+         \PY{c}{\PYZsh{}pLStar = fp(ρLStar,varL,con)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} fp (generic function with 1 method)
+\end{Verbatim}
+            
+    According to \(\sigma = -p +s_{xx}\) we can get \(\sigma(\rho)\).
+\[ g_L(\rho^*_L) =\sigma_L^*= -p(\rho_L^*)+s_{xx}(\rho_L^*)\] As
+\(c^2 = S^2 +\frac{4\mu}{3\rho}\),
+\[ u_L^* = u_L - \int_{\rho_L}^{\rho^*_L} 
+\frac{c}{\rho}d\rho\] can be solve by the numerical integral, and
+\[ f_L(\rho^*_L) = u_L^*\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{function} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{var0}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{,}\PY{n}{case}\PY{o}{::}\PY{n}{Rare}\PY{p}{)}
+             \PY{n}{ρ₀}\PY{p}{,}\PY{n}{u₀} \PY{o}{=} \PY{n}{var0}\PY{o}{.}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0}\PY{o}{.}\PY{n}{u}
+             \PY{n}{a0}\PY{p}{,}\PY{n}{ρ0}\PY{p}{,}\PY{n}{Γ0}\PY{p}{,}\PY{n}{μ}\PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{a0}\PY{p}{,} \PY{n}{con}\PY{o}{.}\PY{n}{ρ0}\PY{p}{,} \PY{n}{con}\PY{o}{.}\PY{n}{Γ0}\PY{p}{,} \PY{n}{con}\PY{o}{.}\PY{n}{μ}
+             \PY{n}{λ₁} \PY{o}{=} \PY{n}{ρ0}\PY{o}{*}\PY{n}{Γ0}
+             \PY{n}{S2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{a0}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{fηη}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{con}\PY{p}{)}\PY{o}{+}\PY{n}{λ₁}\PY{o}{*}\PY{p}{(}\PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{p}{,}\PY{n}{con}\PY{p}{,}\PY{n}{case}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{Sxx}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{p}{,}\PY{n}{con}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{ρ}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}
+             \PY{k}{function} \PY{n}{f2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{case}\PY{o}{.}\PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{1} \PY{o}{\PYZam{}\PYZam{}}  \PY{n}{case}\PY{o}{.}\PY{n}{cs} \PY{o}{==}\PY{l+m+mi}{2}
+                     \PY{k}{return} \PY{o}{\PYZhy{}}\PY{o}{√}\PY{p}{(}\PY{n}{S2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{4}\PY{n}{con}\PY{o}{.}\PY{n}{μ}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{3}\PY{n}{ρ}\PY{p}{)}\PY{p}{)} \PY{o}{/}\PY{n}{ρ}
+                 \PY{k}{else}
+                     \PY{k}{return} \PY{o}{√}\PY{p}{(}\PY{n}{S2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{4}\PY{n}{con}\PY{o}{.}\PY{n}{μ}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{3}\PY{n}{ρ}\PY{p}{)}\PY{p}{)} \PY{o}{/}\PY{n}{ρ}
+                 \PY{k}{end}
+             \PY{k}{end}
+             
+             \PY{n}{u} \PY{o}{=} \PY{n}{u₀} \PY{o}{+} \PY{n}{GaussIntegral}\PY{p}{(}\PY{n}{ρ}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{f2}\PY{p}{(}\PY{n}{ρ}\PY{p}{)}\PY{p}{,} \PY{n}{ρ₀}\PY{p}{,} \PY{n}{ρ}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+             \PY{k}{return} \PY{n}{u}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} fu (generic function with 1 method)
+\end{Verbatim}
+            
+    \subsubsection{数值积分}\label{ux6570ux503cux79efux5206}
+
+We use the Gaussian quadradure to intergrate the integrations above.
+
+For a function \(f(x)\), the intergration from \(-1\) to \(1\) is given
+as \[ 
+  \int_{-1}^1 f(x)dx \approx \sum_{i=0}^n \omega_i f(p_i)
+\] \(\omega_i\) is the weight, and \(p_i\) is the integrating point. For
+different orders they are listed as
+
+\begin{longtable}[c]{@{}lrc@{}}
+\toprule
+number of points,\(n\) & Points, \(p_i\) & Weights,
+\(\omega_i\)\tabularnewline
+\midrule
+\endhead
+1 & 0 & 2\tabularnewline
+2 & \(\pm \frac{1}{\sqrt{3}}\) & 1\tabularnewline
+3 & 0, \(\pm \sqrt{\frac{3}{5}}\) & \(\frac{8}{9}\),\(\frac{5}{9}\),
+\(\frac{5}{9}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+For a integral over \([x_0,x_1]\), this change of interval can be done
+as
+\[ \int_{x_0}^{x_1}f(x) dx= \frac{x_1-x_0}{2}\int_{-1}^{1} f(\frac{x_1-x_0}{2}x+\frac{x_0+x_1}{2})dx
+ \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{function} \PY{n}{GaussIntegral}\PY{p}{(}\PY{n}{f}\PY{o}{::}\PY{k+kt}{Function}\PY{p}{,}\PY{n}{x₀}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,}\PY{n}{x₁}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,}\PY{n}{order}\PY{o}{::}\PY{k+kt}{Int}\PY{p}{)}
+             \PY{n}{t₁}\PY{o}{=} \PY{p}{(}\PY{n}{x₁}\PY{o}{\PYZhy{}}\PY{n}{x₀}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{t₂}\PY{o}{=} \PY{p}{(}\PY{n}{x₁}\PY{o}{+}\PY{n}{x₀}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{ω} \PY{o}{=} \PY{n}{zeros}\PY{p}{(}\PY{k+kt}{Float64}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+             \PY{n}{p} \PY{o}{=} \PY{n}{zeros}\PY{p}{(}\PY{k+kt}{Float64}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{order} \PY{o}{==} \PY{l+m+mi}{1}
+                 \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{2.0}
+                 \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{k}{elseif} \PY{n}{order} \PY{o}{==} \PY{l+m+mi}{3}
+                 \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{;} \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.0}
+                 \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{o}{√}\PY{l+m+mf}{3.0}\PY{p}{;} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{o}{√}\PY{l+m+mf}{3.0}
+             \PY{k}{elseif} \PY{n}{order} \PY{o}{==} \PY{l+m+mi}{5}
+                 \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{8.0}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{;} \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{5.0}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{;} \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{5.0}\PY{o}{/}\PY{l+m+mi}{9}
+                 \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{;} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{o}{√}\PY{p}{(}\PY{l+m+mf}{3.0}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{;} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{o}{√}\PY{p}{(}\PY{l+m+mf}{3.0}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}
+             \PY{k}{elseif} \PY{n}{order} \PY{o}{==} \PY{l+m+mi}{7}
+                 \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{18}\PY{o}{+}\PY{o}{√}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{36}\PY{p}{;} \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{18}\PY{o}{+}\PY{o}{√}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{36}
+                 \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{18}\PY{o}{\PYZhy{}}\PY{o}{√}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{36}\PY{p}{;} \PY{n}{ω}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{18}\PY{o}{\PYZhy{}}\PY{o}{√}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{36}
+                 \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{o}{√}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{*}\PY{o}{√}\PY{p}{(}\PY{l+m+mi}{6}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{o}{√}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{*}\PY{o}{√}\PY{p}{(}\PY{l+m+mi}{6}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{o}{√}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{*}\PY{o}{√}\PY{p}{(}\PY{l+m+mi}{6}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{o}{√}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{7}\PY{o}{*}\PY{o}{√}\PY{p}{(}\PY{l+m+mi}{6}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+             \PY{k}{end}
+             \PY{n}{∑} \PY{o}{=}\PY{n}{sum}\PY{p}{(} \PY{n}{t₁}\PY{o}{*}\PY{n}{ω}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{f}\PY{p}{(}\PY{n}{t₁}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{n}{t₂}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{k+kp}{in} \PY{l+m+mi}{1}\PY{o}{:}\PY{n}{floor}\PY{p}{(}\PY{k+kt}{Int}\PY{p}{,}\PY{n}{order}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{∑}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} GaussIntegral (generic function with 1 method)
+\end{Verbatim}
+            
+    \subsection{2 左侧双膨胀波}\label{ux5de6ux4fa7ux53ccux81a8ux80c0ux6ce2}
+
+    \subsubsection{弹性稀疏波后状态}\label{ux5f39ux6027ux7a00ux758fux6ce2ux540eux72b6ux6001}
+
+In the region \(\widetilde{Q}_L\) \[
+  \widetilde{s}_{xxL} =-\frac{2}{3}Y_0
+\] and the density is
+\[ \widetilde{\rho}_L = \rho_L \text{exp}\left(-\frac{Y_0}{2\mu}+\frac{3 s_{xxL}}{4\mu}\right)\]
+
+    According to (\(2.1\)) we can solve the pressure \(\widetilde{p}_L\)
+,then the velocity \(\widetilde{u}_L\) is solved out.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{function} \PY{n}{Ṽar}\PY{p}{(}\PY{n}{var0}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{case}\PY{p}{,} \PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{)}
+         
+             \PY{n}{Y0}\PY{p}{,} \PY{n}{μ}\PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{Y0}\PY{p}{,} \PY{n}{con}\PY{o}{.}\PY{n}{μ}
+             \PY{n}{sxx}\PY{p}{,}\PY{n}{ρ} \PY{o}{=} \PY{n}{var0}\PY{o}{.}\PY{n}{sxx}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{ρ}
+         
+             \PY{n}{cs} \PY{o}{=} \PY{n}{case}\PY{o}{.}\PY{n}{cs}
+             \PY{k}{if} \PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{1} \PY{o}{||} \PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{3}
+                 \PY{n}{var1} \PY{o}{=} \PY{n}{var0}
+             \PY{k}{elseif} \PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{2} \PY{o}{||} \PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{4}
+                 
+                 \PY{k}{if} \PY{n}{typeof}\PY{p}{(}\PY{n}{case}\PY{p}{)} \PY{o}{==} \PY{n}{Rare} 
+                     \PY{n}{sxx1} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{Y0}
+                     \PY{n}{ρ1} \PY{o}{=} \PY{n}{ρ}\PY{o}{*}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{Y0}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{n}{μ}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{3}\PY{n}{sxx}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{n}{μ}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{elseif} \PY{n}{typeof}\PY{p}{(}\PY{n}{case}\PY{p}{)} \PY{o}{==} \PY{n}{Shock}
+                     \PY{n}{sxx1} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{Y0}
+                     \PY{n}{ρ1} \PY{o}{=} \PY{n}{ρ}\PY{o}{*}\PY{n}{exp}\PY{p}{(}\PY{n}{Y0}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{n}{μ}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m+mi}{3}\PY{n}{sxx}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{n}{μ}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{end}
+                 \PY{n}{p1} \PY{o}{=} \PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0}\PY{p}{,} \PY{n}{con}\PY{p}{,} \PY{n}{case}\PY{p}{)}
+                 \PY{n}{u1} \PY{o}{=} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0}\PY{p}{,} \PY{n}{con}\PY{p}{,} \PY{n}{case}\PY{p}{)}
+             
+                 \PY{n}{var1}\PY{o}{=} \PY{n}{Var}\PY{p}{(}\PY{n}{ρ1}\PY{p}{,} \PY{n}{u1}\PY{p}{,} \PY{n}{p1}\PY{p}{,} \PY{n}{sxx1}\PY{p}{)}
+             \PY{k}{end}
+             \PY{k}{return} \PY{n}{var1}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} Ṽar (generic function with 1 method)
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{From state \(\widetilde{Q}_L\) to state
+\(Q_L^*\)}{From state \textbackslash{}widetilde\{Q\}\_L to state Q\_L\^{}*}}\label{from-state-widetildequx5fl-to-state-qux5fl}
+
+The process is same to Case 1.
+
+    \subsection{3 左侧激波}\label{ux5de6ux4fa7ux6fc0ux6ce2}
+
+ According to the ralation of Runkine-Hugoniot,
+
+\begin{equation} \tag{1.2}
+F_L^*=F_L+s_L(U_L^*-U_L)
+  \end{equation}
+
+    As is
+
+\begin{align}
+    &\rho^*_L(u^*_L-s_L) = \rho_L(u_L-s_L), \tag{1.3}\\
+    &\rho^*_Lu^*_L(u^*_L-s_L) = \rho_Lu_L(u_L-s_L)+\sigma^*_L-\sigma_L,  \tag{1.4}\\
+    &\rho^*_LE^*_L(u^*_L-s_L) = \rho_LE_L(u_L-s_L)+\sigma^*_L u^*_L-\sigma_Lu_L, \tag{1.5}\\
+\end{align}
+
+    According to (\(1.3\)) we have
+
+\begin{equation}\tag{1.6}
+s_L = \frac{\rho_L^* u_L^* - \rho_L u_L}{\rho_L^*-\rho_L}
+\end{equation}
+
+    Subtituting (\(1.3\)) into (\(1.4\)) yields
+
+\begin{equation}\tag{1.7}
+\rho_L(u^*_L-u_L)(u_L-s_L) = \sigma_L^*-\sigma_L
+\end{equation}
+
+    Also according to (\(1.3\)), we have
+
+\begin{equation}
+u_L-s_L = \frac{(u_L - u_L^*)\rho_L^*}{\rho_L^* -\rho_L}
+\end{equation}
+
+Then subtituting it into (\(1.7\))
+
+\begin{equation}\tag{1.8}
+  -t(u^*_L-u_L)^2 = \sigma^*_L-\sigma_L,
+\end{equation}
+
+where \$ t=t=\frac{\rho_L \rho^*_L}{\rho^*_L-\rho_L}\$.
+
+Similar to (1.7), (1.5) can be changed into
+\[ \tag{1.9} t(u_L-u^*_L)(E^*_L-E_L) =\sigma^*_L u^*_L-\sigma_Lu_L
+\]
+
+    Because \(E = e+\frac{1}{2}u^2\), we can get \[ \tag{1.10}
+e_L^* - e_L = - \frac{\sigma_L +\sigma_L^*}{2t}
+\] Also we use the EOS of Mie-Gr"uniesen\\
+\[\tag{1.11}
+  p(\rho,e) = \rho_0 a_0^2f(\eta)+ \rho_0 \Gamma_0 e,
+\] can get \[ \tag{1.12}
+  e=c_0 p-c_1f(\rho/\rho_0),
+\] where \(c_0=\frac{1}{\rho_0\Gamma_0}\) and
+\(c_1=\frac{a_0^2}{\Gamma_0}\).
+
+Using (1.12), from (1.10) we can get \[ \tag{1.13}
+ p^*_L= \frac{2t(c_1f(\rho^*_L)+e_L)-(\sigma_L+s^*_{xxL})}{2tc_0-1},
+\]
+
+    And we use the relation of \(s_{xxL}\) and \(\rho\)
+\[  s_{xxL}^*=s_{xxL}^*(\rho_L^*)=-\frac{4}{3}\mu\text{ln}(\frac{\rho^*_{L}}{\rho_{L}})+s_{xxL}
+\] we can get
+\[ \tag{1.14} \sigma_L^*  = \frac{2t[c_1f(\rho^*_L)-c_0 s_{xxL}^*(\rho^*_L)+e_L] -\sigma_L}{1-2tc_0}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{function} \PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{var0}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{,}\PY{n}{case}\PY{o}{::}\PY{n}{Shock}\PY{p}{)}
+            
+             \PY{n}{ρ₀}\PY{p}{,}\PY{n}{p₀}\PY{p}{,}\PY{n}{sxx₀} \PY{o}{=} \PY{n}{var0}\PY{o}{.}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{p}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{sxx}
+             \PY{n}{ρ0}\PY{p}{,}\PY{n}{Γ0}\PY{p}{,}\PY{n}{a0} \PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{ρ0}\PY{p}{,}\PY{n}{con}\PY{o}{.}\PY{n}{Γ0}\PY{p}{,}\PY{n}{con}\PY{o}{.}\PY{n}{a0}
+             
+             \PY{n}{σ₀} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{p₀}\PY{o}{+}\PY{n}{sxx₀}
+             \PY{n}{e₀} \PY{o}{=}  \PY{n}{PToe}\PY{p}{(}\PY{n}{ρ₀}\PY{p}{,} \PY{n}{p₀}\PY{p}{,} \PY{n}{con}\PY{p}{)}
+             
+             \PY{n}{t} \PY{o}{=}  \PY{n}{ρ₀}\PY{o}{*}\PY{n}{ρ}\PY{o}{/}\PY{p}{(}\PY{n}{ρ}\PY{o}{\PYZhy{}}\PY{n}{ρ₀}\PY{p}{)} \PY{p}{;} \PY{n}{c₀} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{Γ0}\PY{o}{*}\PY{n}{ρ0}\PY{p}{)}\PY{p}{;} \PY{n}{c₁}\PY{o}{=} \PY{n}{a0}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{Γ0}
+             \PY{n}{p} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{n}{t}\PY{o}{*}\PY{p}{(}\PY{n}{c₁}\PY{o}{*}\PY{n}{fη}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c₀}\PY{o}{*}\PY{n}{Sxx}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{p}{,}\PY{n}{con}\PY{p}{)} \PY{o}{+} \PY{n}{e₀}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n}{σ₀}
+                  \PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{n}{t}\PY{o}{*}\PY{n}{c₀}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{p}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} fp (generic function with 2 methods)
+\end{Verbatim}
+            
+    Using (\(1.8\)) we have \[ \tag{1.15} 
+u_L^* = u_L - \sqrt{\frac{\sigma_L-\sigma_L^*}{t}} \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{function} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{var0}\PY{o}{::}\PY{n}{Var}\PY{p}{,} \PY{n}{con}\PY{o}{::}\PY{n}{Const}\PY{p}{,}\PY{n}{case}\PY{o}{::}\PY{n}{Shock}\PY{p}{)}
+            
+             \PY{n}{ρ₀}\PY{p}{,}\PY{n}{u₀}\PY{p}{,}\PY{n}{p₀}\PY{p}{,}\PY{n}{sxx₀} \PY{o}{=} \PY{n}{var0}\PY{o}{.}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{u}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{p}\PY{p}{,}\PY{n}{var0}\PY{o}{.}\PY{n}{sxx}
+             \PY{n}{σ₀} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{p₀}\PY{o}{+}\PY{n}{sxx₀}
+             
+             \PY{n}{sxx}\PY{o}{=}\PY{n}{Sxx}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0}\PY{p}{,}\PY{n}{con}\PY{p}{)}
+             \PY{n}{p}  \PY{o}{=} \PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0}\PY{p}{,} \PY{n}{con}\PY{p}{,} \PY{n}{case}\PY{p}{)}
+             \PY{n}{σ} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{p}\PY{o}{+}\PY{n}{sxx}
+             
+             \PY{n}{t} \PY{o}{=}  \PY{n}{ρ₀}\PY{o}{*}\PY{n}{ρ}\PY{o}{/}\PY{p}{(}\PY{n}{ρ}\PY{o}{\PYZhy{}}\PY{n}{ρ₀}\PY{p}{)}
+             \PY{k}{if} \PY{n}{case}\PY{o}{.}\PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{1} \PY{o}{||} \PY{n}{case}\PY{o}{.}\PY{n}{cs} \PY{o}{==} \PY{l+m+mi}{2}
+                 \PY{n}{u} \PY{o}{=} \PY{n}{u₀} \PY{o}{\PYZhy{}} \PY{o}{√}\PY{p}{(}\PY{p}{(}\PY{n}{σ₀} \PY{o}{\PYZhy{}} \PY{n}{σ}\PY{p}{)}\PY{o}{/}\PY{n}{t}\PY{p}{)}
+             \PY{k}{else}
+                 \PY{n}{u} \PY{o}{=} \PY{n}{u₀} \PY{o}{+} \PY{o}{√}\PY{p}{(}\PY{p}{(}\PY{n}{σ₀} \PY{o}{\PYZhy{}} \PY{n}{σ}\PY{p}{)}\PY{o}{/}\PY{n}{t}\PY{p}{)}
+             \PY{k}{end}
+             \PY{k}{return} \PY{n}{u}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} fu (generic function with 2 methods)
+\end{Verbatim}
+            
+    \subsection{4 左侧双激波}\label{ux5de6ux4fa7ux53ccux6fc0ux6ce2}
+
+    \subsubsection{弹性激波后状态}\label{ux5f39ux6027ux6fc0ux6ce2ux540eux72b6ux6001}
+
+In the region \(\widetilde{Q}_L\) \[
+  \widetilde{s}_{xxL} =\frac{2}{3}Y_0
+\] and the density is
+\[ \widetilde{\rho}_L = \rho_L \text{exp}\left(\frac{Y_0}{2\mu}+\frac{3 s_{xxL}}{4\mu}\right)\]
+From (\(1.14\)) and (\(1.15\)) other viriables can be get. Then use the
+same process from \(\widetilde{Q}_L\) to \(Q_L^*\) as Case 3.
+
+    \#\# 求解\(\sigma_L^*\) 和\$ u\_L\^{}\emph{\$ Let
+\$f\_\{L\}(\rho\^{}}\_L) = u\_L\^{}* \$ and
+\(g_{L}(\rho^*_L) = \sigma_L^*\), samilarly, we let
+\(f_{R}(\rho^*_R) = u_R^*\) and \(g_{R}(\rho^*_R) = \sigma_R^*\), we
+have the relation
+
+\begin{equation}\tag{1.1}
+F(\rho^*_L,\rho^*_R) = f_L(\rho^*_L) - f_R(\rho^*_R) = 0\\
+G(\rho^*_L,\rho^*_R) = g_L(\rho^*_L) - g_R(\rho^*_R) = 0
+\end{equation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{fL}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0L}\PY{p}{,} \PY{n}{conL}\PY{p}{,} \PY{n}{caseL}\PY{p}{)}
+             \PY{n}{fR}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{var0R}\PY{p}{,} \PY{n}{conR}\PY{p}{,} \PY{n}{caseR}\PY{p}{)}
+             \PY{n}{gL}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0L}\PY{p}{,}\PY{n}{conL}\PY{p}{,}\PY{n}{caseL}\PY{p}{)}\PY{o}{+}\PY{n}{Sxx}\PY{p}{(} \PY{n}{ρ}\PY{p}{,} \PY{n}{var0L}\PY{p}{,} \PY{n}{conL}\PY{p}{)}
+             \PY{n}{gR}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{var0R}\PY{p}{,}\PY{n}{conR}\PY{p}{,}\PY{n}{caseR}\PY{p}{)}\PY{o}{+}\PY{n}{Sxx}\PY{p}{(} \PY{n}{ρ}\PY{p}{,} \PY{n}{var0R}\PY{p}{,} \PY{n}{conR}\PY{p}{)}
+         
+             \PY{n}{fL¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{fL}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             \PY{n}{fR¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{fR}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             \PY{n}{gL¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{gL}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             \PY{n}{gR¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{gR}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} gR¹ (generic function with 1 method)
+\end{Verbatim}
+            
+    \subsubsection{牛顿迭代}\label{ux725bux987fux8fedux4ee3}
+
+We use the newton iteration method to evaluate \(\rho^*_L\) and
+\(\rho^*_R\).
+
+\begin{equation}
+\left[ \begin{array}{l}
+ \rho _{R,(k+1)}^*\\
+\rho_{L,(k+1)}^*\\
+\end{array}
+\right] = 
+\left[ \begin{array}{l}
+ \rho _{R,(k)}^*\\
+\rho_{L,(k)}^*\\
+\end{array}
+\right]-
+\left[ \begin{array}{ll}
+\frac{\partial F_{(k)}}{\partial \rho_R^*} & \frac{\partial F_{(k)}}{\partial \rho_L^*}\\
+\frac{\partial G_{(k)}}{\partial \rho_R^*} & \frac{\partial G_{(k)}}{\partial \rho_L^*}\\
+\end{array}
+\right]^{-1}
+\left[ \begin{array}{l}
+F_{(k)}\\
+G_{(k)}\\
+\end{array}
+\right]
+\end{equation}
+
+    from Eq.(\(1.1\)) we can get
+
+\begin{equation}
+\left[ \begin{array}{l}
+ \rho _{R,(k+1)}^*\\
+\rho_{L,(k+1)}^*\\
+\end{array}
+\right] = 
+\left[ \begin{array}{l}
+ \rho _{R,(k)}^*\\
+\rho_{L,(k)}^*\\
+\end{array}
+\right]-
+\left[ \begin{array}{ll}
+-\frac{\partial f_{R,(k)}}{\partial \rho_R^*} & \frac{\partial f_{L,(k)}}{\partial \rho_L^*}\\
+-\frac{\partial g_{R,(k)}}{\partial \rho_R^*} & \frac{\partial g_{,L(k)}}{\partial \rho_L^*}\\
+\end{array}
+\right]^{-1}
+\left[ \begin{array}{l}
+F_{(k)}\\
+G_{(k)}\\
+\end{array}
+\right]
+\end{equation}
+
+where \(\rho_{L,(k)}^*\) and \(\rho_{R,(k)}^*\) are the k-th iteration
+values,
+\(F(k) = F(\rho^*_{L,(k)},\rho^*_{R,(k)})\),\(G(k) = G(\rho^*_{L,(k)},\rho^*_{R,(k)})\).
+
+    \[u = u - J^{-1}F\]
+
+    For a rarefaction wave in the left, the derivatives are solved by
+
+\begin{equation}
+\frac{\partial f_{L,(k)}}{\partial \rho^*_{L,(k)}} = \frac{c(\rho^*_{L,(k)})}{\rho^*_{L,(k)}}\\
+\frac{\partial g_{L,(k)}}{\partial \rho^*_{L,(k)}} = c(\rho^*_{L,(k)})^2
+\end{equation}
+
+    \paragraph{初始条件}\label{ux521dux59cbux6761ux4ef6}
+
+We take an intial iteration value as
+
+\begin{equation}
+\rho_{L,(0)}^* = \rho_{R,(0)}^* = \frac{\rho_L +\rho_R}{2}
+\end{equation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{function} \PY{n}{Derivative}\PY{p}{(}\PY{n}{f}\PY{o}{::}\PY{k+kt}{Function}\PY{p}{,}\PY{n}{x}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{)}
+             \PY{n}{ϵ₀} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}8}
+             \PY{k}{if} \PY{n}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}=} \PY{n}{ϵ₀}
+                 \PY{n}{ϵ}\PY{o}{=} \PY{n}{ϵ₀}\PY{o}{*}\PY{n}{x}
+             \PY{k}{else}
+                 \PY{n}{ϵ} \PY{o}{=}\PY{n}{ϵ₀}
+             \PY{k}{end}
+             \PY{n}{f¹}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{=} \PY{p}{(}\PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{n}{ϵ}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{ϵ}
+             \PY{k}{return} \PY{n}{f¹}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} Derivative (generic function with 1 method)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{function} \PY{n}{NewtonIter!}\PY{p}{(}\PY{n}{U}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{n}{J}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{n}{F}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{TOL}\PY{o}{::}\PY{k+kt}{Float64} \PY{o}{=} \PY{l+m+mf}{1.e\PYZhy{}6}\PY{p}{)} 
+             \PY{n+nb}{I}\PY{p}{,} \PY{o}{=} \PY{n}{size}\PY{p}{(}\PY{n}{U}\PY{p}{)}
+             \PY{n}{U\PYZus{}new} \PY{o}{=} \PY{n}{zeros}\PY{p}{(}\PY{k+kt}{Float64}\PY{p}{,} \PY{n+nb}{I}\PY{p}{)}
+             \PY{k}{while} \PY{k+kc}{true}  
+                 \PY{n}{c} \PY{o}{=} \PY{n}{max}\PY{p}{(}\PY{n}{abs}\PY{p}{(}\PY{n}{F}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{abs}\PY{p}{(}\PY{n}{F}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{c} \PY{o}{\PYZlt{}=} \PY{n}{TOL}
+                     \PY{k}{break}
+                 \PY{k}{end}
+                 \PY{n}{U\PYZus{}new} \PY{o}{=} \PY{n}{U} \PY{o}{\PYZhy{}} \PY{n}{inv}\PY{p}{(}\PY{n}{J}\PY{p}{)}\PY{o}{*}\PY{n}{F} \PY{c}{\PYZsh{} same to inv(J)×F}
+            \PY{c}{\PYZsh{}     c= CHA(U,U\PYZus{}new,F)}
+              \PY{c}{\PYZsh{}   if c \PYZlt{}= TOL}
+               \PY{c}{\PYZsh{}      break}
+               \PY{c}{\PYZsh{}  end}
+             \PY{k}{end}
+             \PY{k}{return} \PY{n}{U}
+             
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} NewtonIter! (generic function with 2 methods)
+\end{Verbatim}
+            
+    \paragraph{收敛准则}\label{ux6536ux655bux51c6ux5219}
+
+The iteration procedure stops with the criterion of
+\(\text{CHA}\le \text{TOL}\), where
+
+\begin{equation}
+\text{CHA} = \text{max} \left[ 
+\frac{2|(\rho_L^*)_{(k+1)}-(\rho_L^*)_{(k)}|}{|(\rho_L^*)_{(k+1)}+(\rho_L^*)_{(k)}|}, \frac{2|(\rho_R^*)_{(k+1)}-(\rho_R^*)_{(k)}|}{|(\rho_R^*)_{(k+1)}+(\rho_R^*)_{(k)}|}, |F_{(k)}|, |G_{(k)}| \right]
+\end{equation}
+
+and TOL is a small tolerance by numerical experiments, we take as
+\(\text{TOL} = 10^{-6}\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k}{function} \PY{n}{CHA}\PY{p}{(}\PY{n}{R0}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{R1}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{F}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{n}{Floa64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{)}
+             
+             \PY{n}{ρₗ₀} \PY{o}{=} \PY{n}{R0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;} \PY{n}{ρᵣ₀} \PY{o}{=} \PY{n}{R0}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{ρₗ₁} \PY{o}{=} \PY{n}{R1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;} \PY{n}{ρᵣ₁} \PY{o}{=} \PY{n}{R1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             
+             \PY{n}{CHA} \PY{o}{=} \PY{n}{max}\PY{p}{(}\PY{n}{abs}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{(}\PY{n}{ρₗ₁}\PY{o}{\PYZhy{}}\PY{n}{ρₗ₀}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{ρₗ₁}\PY{o}{+}\PY{n}{ρₗ₀}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                       \PY{n}{abs}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{(}\PY{n}{ρᵣ₁}\PY{o}{\PYZhy{}}\PY{n}{ρᵣ₀}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{ρᵣ₁}\PY{o}{+}\PY{n}{ρᵣ₀}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{F}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{F}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{CHA}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        UndefVarError: Floa64 not defined
+
+        
+
+        Stacktrace:
+
+         [1] top-level scope at In[32]:1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{include}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{/}\PY{l+s}{h}\PY{l+s}{o}\PY{l+s}{m}\PY{l+s}{e}\PY{l+s}{/}\PY{l+s}{b}\PY{l+s}{f}\PY{l+s}{l}\PY{l+s}{y}\PY{l+s}{/}\PY{l+s}{w}\PY{l+s}{o}\PY{l+s}{r}\PY{l+s}{k}\PY{l+s}{s}\PY{l+s}{p}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{e}\PY{l+s}{/}\PY{l+s}{J}\PY{l+s}{u}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{a}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{u}\PY{l+s}{d}\PY{l+s}{y}\PY{l+s}{/}\PY{l+s}{L}\PY{l+s}{a}\PY{l+s}{g}\PY{l+s}{r}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{g}\PY{l+s}{i}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{\PYZus{}}\PY{l+s}{1}\PY{l+s}{d}\PY{l+s}{\PYZhy{}}\PY{l+s}{2}\PY{l+s}{m}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{i}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{s}\PY{l+s}{.}\PY{l+s}{j}\PY{l+s}{l}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} Plastic (generic function with 1 method)
+\end{Verbatim}
+            
+    \section{根据迭代结果重新求解左右状态}\label{ux6839ux636eux8fedux4ee3ux7ed3ux679cux91cdux65b0ux6c42ux89e3ux5de6ux53f3ux72b6ux6001}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k}{function} \PY{n}{Exact\PYZus{}Riemann}\PY{p}{(}\PY{n}{uL}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{uR}\PY{o}{::}\PY{k+kt}{Array}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{conL}\PY{o}{::}\PY{n}{Const}\PY{p}{,} \PY{n}{conR}\PY{o}{::}\PY{n}{Const} \PY{p}{)}
+                 
+             
+             \PY{n}{var0L} \PY{o}{=} \PY{n}{Var}\PY{p}{(}\PY{n}{uL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{uL}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{uL}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{n}{uL}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+             \PY{n}{var0R} \PY{o}{=} \PY{n}{Var}\PY{p}{(}\PY{n}{uR}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{uR}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{uR}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{n}{uR}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+             \PY{n+nd}{@show} \PY{n}{var0L}
+             
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}预求解和分类    }
+             \PY{n}{caseL}\PY{p}{,}\PY{n}{caseR} \PY{o}{=} \PY{n}{Presolve}\PY{p}{(}\PY{n}{var0L}\PY{p}{,} \PY{n}{var0R}\PY{p}{,} \PY{n}{conL}\PY{p}{,} \PY{n}{conR}\PY{p}{)}
+             \PY{n+nd}{@show} \PY{n}{caseL}\PY{p}{,} \PY{n}{caseR}
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}求解  Q̂ }
+             \PY{n}{varL} \PY{o}{=} \PY{n}{Ṽar}\PY{p}{(}\PY{n}{var0L}\PY{p}{,} \PY{n}{caseL}\PY{p}{,}\PY{n}{conL}\PY{p}{)}
+             \PY{n}{varR} \PY{o}{=} \PY{n}{Ṽar}\PY{p}{(}\PY{n}{var0R}\PY{p}{,} \PY{n}{caseR}\PY{p}{,}\PY{n}{conR}\PY{p}{)}
+             \PY{n}{ρL}\PY{p}{,} \PY{n}{uL}\PY{p}{,} \PY{n}{pL}\PY{p}{,} \PY{n}{sxxL} \PY{o}{=} \PY{n}{varL}\PY{o}{.}\PY{n}{ρ}\PY{p}{,} \PY{n}{varL}\PY{o}{.}\PY{n}{u}\PY{p}{,} \PY{n}{varL}\PY{o}{.}\PY{n}{p}\PY{p}{,} \PY{n}{varL}\PY{o}{.}\PY{n}{sxx}
+             \PY{n}{ρR}\PY{p}{,} \PY{n}{uR}\PY{p}{,} \PY{n}{pR}\PY{p}{,} \PY{n}{sxxR} \PY{o}{=} \PY{n}{varR}\PY{o}{.}\PY{n}{ρ}\PY{p}{,} \PY{n}{varR}\PY{o}{.}\PY{n}{u}\PY{p}{,} \PY{n}{varR}\PY{o}{.}\PY{n}{p}\PY{p}{,} \PY{n}{varR}\PY{o}{.}\PY{n}{sxx}
+         
+             \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}迭代初始化    }
+             \PY{n}{ρLStar} \PY{o}{=} \PY{p}{(}\PY{n}{ρL} \PY{o}{+}\PY{n}{ρR}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{ρRStar} \PY{o}{=} \PY{p}{(}\PY{n}{ρL} \PY{o}{+}\PY{n}{ρR}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+            
+             \PY{n}{fL}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{varL}\PY{p}{,} \PY{n}{conL}\PY{p}{,} \PY{n}{caseL}\PY{p}{)}
+             \PY{n}{fR}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{fu}\PY{p}{(}\PY{n}{ρ}\PY{p}{,} \PY{n}{varR}\PY{p}{,} \PY{n}{conR}\PY{p}{,} \PY{n}{caseR}\PY{p}{)}
+             \PY{n}{gL}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{varL}\PY{p}{,}\PY{n}{conL}\PY{p}{,}\PY{n}{caseL}\PY{p}{)}\PY{o}{+}\PY{n}{Sxx}\PY{p}{(} \PY{n}{ρ}\PY{p}{,} \PY{n}{varL}\PY{p}{,} \PY{n}{conL}\PY{p}{)}
+             \PY{n}{gR}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{fp}\PY{p}{(}\PY{n}{ρ}\PY{p}{,}\PY{n}{varR}\PY{p}{,}\PY{n}{conR}\PY{p}{,}\PY{n}{caseR}\PY{p}{)}\PY{o}{+}\PY{n}{Sxx}\PY{p}{(} \PY{n}{ρ}\PY{p}{,} \PY{n}{varR}\PY{p}{,} \PY{n}{conR}\PY{p}{)}
+         
+             \PY{n}{fL¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{fL}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             \PY{n}{fR¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{fR}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             \PY{n}{gL¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{gL}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             \PY{n}{gR¹}\PY{p}{(}\PY{n}{ρ}\PY{p}{)} \PY{o}{=} \PY{n}{Derivative}\PY{p}{(}\PY{n}{gR}\PY{p}{,}\PY{n}{ρ}\PY{p}{)}
+             
+             \PY{n}{TOL} \PY{o}{=} \PY{l+m+mf}{1.e\PYZhy{}6}
+             \PY{k}{while} \PY{k+kc}{true}
+               
+                 \PY{n}{J} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{fR¹}\PY{p}{(}\PY{n}{ρRStar}\PY{p}{)} \PY{n}{fL¹}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{)}\PY{p}{]}\PY{p}{;} 
+                      \PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{gR¹}\PY{p}{(}\PY{n}{ρRStar}\PY{p}{)} \PY{n}{gL¹}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{)}\PY{p}{]}\PY{p}{]}
+             
+                 \PY{n}{U} \PY{o}{=} \PY{p}{[}\PY{n}{ρRStar}\PY{p}{,} \PY{n}{ρLStar}\PY{p}{]}
+             
+                 \PY{n}{F} \PY{o}{=} \PY{p}{[}\PY{n}{fL}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{)}\PY{o}{\PYZhy{}} \PY{n}{fR}\PY{p}{(}\PY{n}{ρRStar}\PY{p}{)}\PY{p}{,} 
+                      \PY{n}{gL}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{)}\PY{o}{\PYZhy{}} \PY{n}{gR}\PY{p}{(}\PY{n}{ρRStar}\PY{p}{)}\PY{p}{]}
+                 
+                 \PY{n}{c} \PY{o}{=} \PY{n}{max}\PY{p}{(}\PY{n}{abs}\PY{p}{(}\PY{n}{F}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{abs}\PY{p}{(}\PY{n}{F}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}  
+                 \PY{k}{if} \PY{n}{c} \PY{o}{\PYZlt{}=} \PY{n}{TOL}
+                     \PY{k}{break}
+                 \PY{k}{end}
+                 \PY{n+nd}{@show} \PY{n}{J}\PY{p}{,} \PY{n}{U}\PY{p}{,}\PY{n}{F}
+                 \PY{n}{U} \PY{o}{=} \PY{n}{U} \PY{o}{\PYZhy{}} \PY{n}{inv}\PY{p}{(}\PY{n}{J}\PY{p}{)}\PY{o}{*}\PY{n}{F}
+                 \PY{n}{ρRStar} \PY{o}{=} \PY{n}{U}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{ρLStar} \PY{o}{=} \PY{n}{U}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{k}{end}
+             
+             \PY{n+nd}{@show} \PY{n}{U}
+             \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} 重新求解}
+             \PY{n}{pLStar} \PY{o}{=} \PY{n}{fp}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{,} \PY{n}{varL}\PY{p}{,} \PY{n}{conL}\PY{p}{,}\PY{n}{caseL}\PY{p}{)}
+             \PY{n}{s\PYZus{}Star} \PY{o}{=} \PY{n}{fu}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{,} \PY{n}{varL}\PY{p}{,} \PY{n}{conL}\PY{p}{,}\PY{n}{caseL}\PY{p}{)}
+             \PY{n}{sxxLStar} \PY{o}{=} \PY{n}{Sxx}\PY{p}{(}\PY{n}{ρLStar}\PY{p}{,} \PY{n}{varL}\PY{p}{,} \PY{n}{conL}\PY{p}{)}
+         
+             \PY{n}{pRStar} \PY{o}{=} \PY{n}{fp}\PY{p}{(}\PY{n}{ρRStar}\PY{p}{,} \PY{n}{varR}\PY{p}{,} \PY{n}{conR}\PY{p}{,}\PY{n}{caseR}\PY{p}{)}
+             \PY{n}{sxxRStar} \PY{o}{=} \PY{n}{Sxx}\PY{p}{(}\PY{n}{ρRStar}\PY{p}{,} \PY{n}{varR}\PY{p}{,} \PY{n}{conR}\PY{p}{)}
+             \PY{n}{fL}\PY{o}{=}\PY{n}{zeros}\PY{p}{(}\PY{k+kt}{Float64}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{fR}\PY{o}{=}\PY{n}{zeros}\PY{p}{(}\PY{k+kt}{Float64}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{fL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{n}{fL}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{pLStar}\PY{o}{\PYZhy{}}\PY{n}{sxxLStar}
+             \PY{n}{fL}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{pLStar}\PY{o}{\PYZhy{}}\PY{n}{sxxLStar}\PY{p}{)}\PY{o}{*}\PY{n}{s\PYZus{}Star}
+             \PY{n}{fL}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{n}{conL}\PY{o}{.}\PY{n}{μ}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{s\PYZus{}Star}
+             \PY{n}{uuh} \PY{o}{=} \PY{n}{s\PYZus{}Star}
+         
+             \PY{n}{fR}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{n}{fR}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{pRStar}\PY{o}{\PYZhy{}}\PY{n}{sxxRStar}
+             \PY{n}{fR}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{pRStar}\PY{o}{\PYZhy{}}\PY{n}{sxxRStar}\PY{p}{)}\PY{o}{*}\PY{n}{s\PYZus{}Star}
+             \PY{n}{fR}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{n}{conR}\PY{o}{.}\PY{n}{μ}\PY{o}{/}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{s\PYZus{}Star}
+             \PY{n}{uuh} \PY{o}{=} \PY{n}{s\PYZus{}Star}
+             
+             \PY{k}{return} \PY{n}{fL}\PY{p}{,}\PY{n}{fR}\PY{p}{,} \PY{n}{uuh}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} Exact\_Riemann (generic function with 1 method)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{A} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{;} \PY{p}{[}\PY{l+m+mi}{2} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}
+         \PY{n}{typeof}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} Array\{Int64,2\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{ρ2}\PY{o}{=}\PY{l+m+mi}{3985}
+             \PY{n}{u2}\PY{o}{=}\PY{l+m+mf}{0.0}
+             \PY{n}{p2}\PY{o}{=}\PY{l+m+mf}{1.e3}
+             \PY{n}{sxx2}\PY{o}{=}\PY{l+m+mi}{0}
+             
+             
+             \PY{n}{ρ1}\PY{o}{=}\PY{l+m+mi}{2785}
+             \PY{n}{u1}\PY{o}{=}\PY{l+m+mf}{800.0}
+             \PY{n}{p1}\PY{o}{=}\PY{l+m+mf}{1.e4}
+             \PY{n}{sxx1}\PY{o}{=}\PY{l+m+mf}{6.e4}
+         \PY{n}{uL} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2785}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.e\PYZhy{}6}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{]}
+         \PY{n}{uR} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2785}\PY{p}{,} \PY{l+m+mf}{100.0}\PY{p}{,} \PY{l+m+mf}{1.e\PYZhy{}6}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{]}
+         \PY{n}{conL} \PY{o}{=} \PY{n}{Const}\PY{p}{(}\PY{l+m+mf}{3e8}\PY{p}{,}\PY{l+m+mi}{2785}\PY{p}{,}\PY{l+m+mf}{2.0}\PY{p}{,}\PY{l+m+mf}{2.76e10}\PY{p}{,}\PY{l+m+mf}{5328.0}\PY{p}{,}\PY{l+m+mf}{1.338}\PY{p}{)}
+         \PY{n}{conR} \PY{o}{=} \PY{n}{Const}\PY{p}{(}\PY{l+m+mf}{3e8}\PY{p}{,}\PY{l+m+mi}{2785}\PY{p}{,}\PY{l+m+mf}{2.0}\PY{p}{,}\PY{l+m+mf}{2.76e10}\PY{p}{,}\PY{l+m+mf}{5328.0}\PY{p}{,}\PY{l+m+mf}{1.338}\PY{p}{)}
+         \PY{n}{fL}\PY{p}{,}\PY{n}{fR}\PY{p}{,}\PY{n}{uuh} \PY{o}{=} \PY{n}{Exact\PYZus{}Riemann}\PY{p}{(}\PY{n}{uL}\PY{p}{,}\PY{n}{uR}\PY{p}{,}\PY{n}{conL}\PY{p}{,}\PY{n}{conR}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+var0L = Var(2785.0, 0.0, 1.0e-6, 0.0)
+(sxxLstar, sxxRstar, ρLstar, ρRstar) = (2.841756221218475e8, 2.841756221218475e8, 2763.5765982165267, 2763.5765982165267)
+(caseL, caseR) = (Rare(2), Rare(4))
+(J, U, F) = ([-2.32884 2.32884; 2.83256e7 -2.83256e7], [2769.91, 2769.91], [-100.0, 0.0])
+(J, U, F) = ([1.86967e-12 -1.86967e-12; 1.30877e-7 -1.30877e-7], [5.94327e11, 5.94327e11], [-100.0, 0.0])
+(J, U, F) = ([1.01938e-24 -1.0165e-24; -0.0 0.0], [8.92204e19, 8.92204e19], [-100.0, 0.0])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        LinearAlgebra.LAPACKException(2)
+
+        
+
+        Stacktrace:
+
+         [1] chklapackerror at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/lapack.jl:38 [inlined]
+
+         [2] trtrs!(::Char, ::Char, ::Char, ::Array\{Float64,2\}, ::Array\{Float64,2\}) at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/lapack.jl:3348
+
+         [3] inv at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/triangular.jl:583 [inlined]
+
+         [4] inv(::Array\{Float64,2\}) at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/dense.jl:728
+
+         [5] Exact\_Riemann(::Array\{Float64,1\}, ::Array\{Float64,1\}, ::Const, ::Const) at ./In[44]:47
+
+         [6] top-level scope at In[48]:15
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{J} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.31594} \PY{l+m+mf}{2.31594}\PY{p}{;} \PY{l+m+mf}{4.16012e7} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.16012e7}\PY{p}{]}
+          \PY{n}{inv}\PY{p}{(}\PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        LinearAlgebra.SingularException(2)
+
+        
+
+        Stacktrace:
+
+         [1] checknonsingular at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/factorization.jl:12 [inlined]
+
+         [2] \#lu!\#103(::Bool, ::Function, ::Array\{Float64,2\}, ::Val\{true\}) at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/lu.jl:41
+
+         [3] \#lu! at ./none:0 [inlined]
+
+         [4] \#lu\#107 at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/lu.jl:142 [inlined]
+
+         [5] lu at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/lu.jl:142 [inlined] (repeats 2 times)
+
+         [6] inv(::Array\{Float64,2\}) at /buildworker/worker/package\_linux64/build/usr/share/julia/stdlib/v1.1/LinearAlgebra/src/dense.jl:732
+
+         [7] top-level scope at In[101]:2
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{o}{?} \PY{n}{fηη}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+"\textcolor{ansi-cyan}{fηη}" can be typed by \textcolor{ansi-cyan}{f\textbackslash{}eta<tab>\textbackslash{}eta<tab>}
+
+search: \textbf{f}\textbf{η}\textbf{η}
+
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}64}]:}
+    
+    No documentation found.
+
+\texttt{fηη} is a \texttt{Function}.
+
+\begin{verbatim}
+# 1 method for generic function "fηη":
+[1] fηη(ρ::Float64, c::Const) in Main at /home/bfly/workspace/Juliastudy/Lagrangian_1d-2materials.jl:36
+\end{verbatim}
+
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{ρ2}\PY{o}{=}\PY{l+m+mi}{2785}
+             \PY{n}{u2}\PY{o}{=}\PY{l+m+mf}{0.0}
+             \PY{n}{p2}\PY{o}{=}\PY{l+m+mf}{1.e\PYZhy{}6}
+             \PY{n}{sxx2}\PY{o}{=}\PY{l+m+mi}{0}
+             
+             
+             \PY{n}{ρ1}\PY{o}{=}\PY{l+m+mi}{2785}
+             \PY{n}{u1}\PY{o}{=}\PY{l+m+mf}{800.0}
+             \PY{n}{p1}\PY{o}{=}\PY{l+m+mf}{1.e\PYZhy{}6}
+             \PY{n}{sxx1}\PY{o}{=}\PY{l+m+mf}{6.e4}
+         \PY{n}{uL} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2785}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.e\PYZhy{}6}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{]}
+         \PY{n}{uR} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2785}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.e\PYZhy{}6}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{]}
+         \PY{n}{conL} \PY{o}{=} \PY{n}{Const}\PY{p}{(}\PY{l+m+mf}{3e8}\PY{p}{,}\PY{l+m+mi}{2785}\PY{p}{,}\PY{l+m+mf}{2.0}\PY{p}{,}\PY{l+m+mf}{2.76e10}\PY{p}{,}\PY{l+m+mf}{5328.0}\PY{p}{,}\PY{l+m+mf}{1.338}\PY{p}{)}
+         \PY{n}{conR} \PY{o}{=} \PY{n}{Const}\PY{p}{(}\PY{l+m+mf}{3e8}\PY{p}{,}\PY{l+m+mi}{2785}\PY{p}{,}\PY{l+m+mf}{2.0}\PY{p}{,}\PY{l+m+mf}{2.76e10}\PY{p}{,}\PY{l+m+mf}{5328.0}\PY{p}{,}\PY{l+m+mf}{1.338}\PY{p}{)}
+         \PY{n}{fL}\PY{p}{,}\PY{n}{fR}\PY{p}{,}\PY{n}{uuh} \PY{o}{=} \PY{n}{Exact\PYZus{}Riemann}\PY{p}{(}\PY{n}{uL}\PY{p}{,}\PY{n}{uR}\PY{p}{,}\PY{n}{conL}\PY{p}{,}\PY{n}{conR}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        UndefVarError: var0R not defined
+
+        
+
+        Stacktrace:
+
+         [1] (::getfield(Main, Symbol("\#fR\#23"))\{Const,Rare\})(::Float64) at ./In[26]:19
+
+         [2] (::getfield(Main, Symbol("\#f¹\#8"))\{getfield(Main, Symbol("\#fR\#23"))\{Const,Rare\}\})(::Float64) at ./In[14]:8
+
+         [3] Derivative(::getfield(Main, Symbol("\#fR\#23"))\{Const,Rare\}, ::Float64) at ./In[14]:9
+
+         [4] (::getfield(Main, Symbol("\#fR¹\#27"))\{getfield(Main, Symbol("\#fR\#23"))\{Const,Rare\}\})(::Float64) at ./In[26]:24
+
+         [5] Exact\_Riemann(::Array\{Float64,1\}, ::Array\{Float64,1\}, ::Const, ::Const) at ./In[26]:29
+
+         [6] top-level scope at In[46]:15
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
